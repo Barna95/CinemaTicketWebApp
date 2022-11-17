@@ -17,6 +17,7 @@ namespace eTickets
 
             //Services configuration
             builder.Services.AddScoped<IActorsService, ActorsService>();
+            builder.Services.AddScoped<IProducersService, ProducersService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
