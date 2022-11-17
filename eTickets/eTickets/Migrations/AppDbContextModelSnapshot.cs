@@ -84,7 +84,7 @@ namespace eTickets.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinema");
+                    b.ToTable("Cinemas");
                 });
 
             modelBuilder.Entity("eTickets.Models.Movie", b =>
