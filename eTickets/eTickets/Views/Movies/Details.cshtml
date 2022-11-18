@@ -72,13 +72,13 @@
                 </div>
                 <div class="col-md-12">
                     <div class="card-footer">
-                        <p class="card-text">
-                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                        <p class="card-text float-end">
+                            <a class="btn btn-outline-primary mx-2" asp-action="Index">
                                 Back to List
                             </a>
-                            <a class="btn btn-success text-white  @((DateTime.Now > Model.EndDate) ? "disabled" : "")" 
+                            <a class="btn btn-success text-white float-end @((DateTime.Now > Model.EndDate) ? "disabled" : "")" 
                                asp-controller="Orders" 
-                               asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))</a>
+                               asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Buy (Price @Model.Price.ToString("c"))</a>
                         </p>
                     </div>
                 </div>
