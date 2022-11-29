@@ -27,6 +27,14 @@ namespace eTickets.Data
                 .WithMany(am => am.Actors_Movies)
                 .HasForeignKey(m => m.ActorId);
 
+
+            modelBuilder.Entity<Movie>()
+                .Property(p => p.Budget)
+                .HasColumnType("decimal(18,2)");
+            modelBuilder.Entity<Movie>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
             base.OnModelCreating(modelBuilder);
 
             

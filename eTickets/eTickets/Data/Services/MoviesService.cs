@@ -1,4 +1,5 @@
 ﻿using eTickets.Data.Base;
+using eTickets.Data.Enums;
 using eTickets.Data.ViewModels;
 using eTickets.Models;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,12 @@ namespace eTickets.Data.Services
                 StartDate = data.StartDate,
                 EndDate = data.EndDate,
                 MovieCategory = data.MovieCategory,
-                ProducerId = data.ProducerId
+                ProducerId = data.ProducerId,
+                Rating = data.Rating,
+                PreviewLink = data.PreviewLink,
+                Language = data.Language,
+                Budget = data.Budget,
+                RunTime = data.RunTime
             };
             await _context.Movies.AddAsync(newMovie);
             await _context.SaveChangesAsync();
@@ -85,6 +91,11 @@ namespace eTickets.Data.Services
                 dbMovie.EndDate = data.EndDate;
                 dbMovie.MovieCategory = data.MovieCategory;
                 dbMovie.ProducerId = data.ProducerId;
+                dbMovie.Rating = data.Rating;
+                dbMovie.PreviewLink = data.PreviewLink;
+                dbMovie.Language = data.Language;
+                dbMovie.Budget = data.Budget;
+                dbMovie.RunTime = data.RunTime;
                 await _context.SaveChangesAsync();
             }
 

@@ -19,6 +19,13 @@ namespace eTickets.Models
         public DateTime EndDate { get; set; }
         public MovieCategory MovieCategory { get; set; }
 
+        // Extras
+        public double Rating { get; set; }
+        public string PreviewLink { get; set; }
+        public Language Language { get; set; }
+        public decimal Budget { get; set; }
+        public string RunTime { get; set; }
+
         //Relationships
         public List<Actor_Movie> Actors_Movies { get; set; }
 

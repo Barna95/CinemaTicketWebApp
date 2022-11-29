@@ -44,8 +44,24 @@
                                 <input asp-for="ImageURL" class="form-control" />
                                 <span asp-validation-for="ImageURL" class="text-danger"></span>
                             </div>
+                            <div class="form-group">
+                                <label asp-for="Rating" class="control-label"></label>
+                                <input asp-for="Rating" class="form-control" />
+                                <span asp-validation-for="Rating" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="RunTime" class="control-label"></label>
+                                <input asp-for="RunTime" class="form-control" />
+                                <span asp-validation-for="RunTime" class="text-danger"></span>
+                            </div>
                         </div>
+
                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Budget" class="control-label"></label>
+                                <input asp-for="Budget" class="form-control"></input>
+                                <span asp-validation-for="Budget" class="text-danger"></span>
+                            </div>
                             <div class="form-group">
                                 <label asp-for="CinemaId" class="control-label"></label>
                                 <select asp-for="CinemaId" class="form-control" asp-items="ViewBag.Cinemas"></select>
@@ -63,28 +79,47 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="ActorIds" class="control-label"></label>
-                                <select asp-for="ActorIds" class="form-control"  asp-items="ViewBag.Actors" multiple></select>
+                                <select asp-for="ActorIds" class="form-control" asp-items="ViewBag.Actors" multiple></select>
                                 <span asp-validation-for="ActorIds" class="text-danger"></span>
                             </div>
+                            <div class="form-group">
+                                <label asp-for="Language" class="control-label"></label>
+                                <select asp-for="Language" class="form-control" asp-items="Html.GetEnumSelectList<Language>()"></select>
+                                <span asp-validation-for="Language" class="text-danger"></span>
+                            </div>
+
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label asp-for="Description" class="control-label"></label>
-                                <textarea asp-for="Description" class="form-control"></textarea>
-                                <span asp-validation-for="Description" class="text-danger"></span>
+                                <label asp-for="PreviewLink" class="control-label"></label>
+                                <textarea asp-for="PreviewLink" class="form-control"></textarea>
+                                <span asp-validation-for="PreviewLink" class="text-danger"></span>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label"></label>
+                                    <textarea asp-for="Description" class="form-control"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr/>
                         </div>
-                    </div>
+ 
+                    <iframe width="420" height="315"
 
-                    <div class="col-md-4 offset-4 text-center">
-                        <img width="100%" id="ImageUrlPreview" />
-                    </div>
-
+                            id="VideoUrlPreview"> 
+                    </iframe>
+  
+                        <div class="col-md-4 offset-4 text-center">
+                            <hr/>
+                            <img width="100%" id="ImageUrlPreview"/>
+                        </div>
+  
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-outline-success float-right" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
                     </div>
-
+                    </div>
                 </form>
 
             </div>
@@ -94,10 +129,15 @@
 </div>
 
 @section Scripts{ 
-        <script>
-            $("#ImageURL").on("change", function () {
-                var output = document.getElementById("ImageUrlPreview");
-                output.src = $(this).val();
-            })
-        </script>
+            <script>
+                $("#ImageURL").on("change", function () {
+                    var output = document.getElementById("ImageUrlPreview");
+                    output.src = $(this).val();
+                })
+
+                $("#PreviewLink").on("change", function () {
+                        var output = document.getElementById("VideoUrlPreview");
+                    output.src = $(this).val();
+                })
+            </script>
 }

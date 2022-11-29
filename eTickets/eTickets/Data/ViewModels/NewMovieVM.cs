@@ -36,6 +36,28 @@ namespace eTickets.Data.ViewModels
         [Required(ErrorMessage = "Movie category is required")]
         public MovieCategory MovieCategory { get; set; }
 
+        // Extras
+        [Display(Name = "Select Rating")]
+        [Required(ErrorMessage = "Rating is required")]
+        public double Rating { get; set; }
+
+        [Display(Name = "Select PreviewLink")]
+        [Required(ErrorMessage = "PreviewLink is required")]
+        public string PreviewLink { get; set; }
+
+        [Display(Name = "Select Language")]
+        [Required(ErrorMessage = "Language is required")]
+        public Language Language { get; set; }
+
+        [Display(Name = "Select Budget")]
+        [Required(ErrorMessage = "Budget is required")]
+        public decimal Budget { get; set; }
+
+        [Display(Name = "Select RunTime")]
+        [Required(ErrorMessage = "RunTime is required")]
+        public string RunTime { get; set; }
+
+
         //Relationships
         [Display(Name = "Select actor(s)")]
         [Required(ErrorMessage = "Movie actor(s) is required")]

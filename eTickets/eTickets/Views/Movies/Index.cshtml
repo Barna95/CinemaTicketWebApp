@@ -3,66 +3,88 @@
 @{
     ViewData["Title"] = "List of Movies";
 }
-
-<div class="row">
+<link rel="stylesheet" href="~/css/movies.css" asp-append-version="true" />
+@*<div>
     @foreach (var item in Model)
-    {
-            <div class="col-md-2 col-xs-8 border-primary mb-3">
-                <div class="card mb-5" style="max-width: 400px;">
-                    <div class="row g-0">
-                        <div class="col-md-12">
-                            <div class="card-header text-white bg-info">
-                                <p class="card-text">
-                                    <h5 class="card-title">
-                                    @item.Name
-                                        <a class="text-white float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                    </h5>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <img src="@item.ImageURL" width="100%" alt="@item.Name">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body">
-                            @*<p class="card-text">@item.Description</p>*@
-                                <p class="card-text"><b>Cinema: </b>@item.Cinema.Name</p>
-                                <p class="card-text"><b>Category: </b>@item.MovieCategory</p>
-                                <p class="card-text"><b>Start Date: </b>@item.StartDate.ToString("dd MMM yyyy")</p>
-                                <p class="card-text"><b>End Date: </b>@item.EndDate.ToString("dd MMM yyyy")</p>
-                                <p class="card-text ">
-                                    <b>Status: </b>
-                                @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
-                                {
-                                            <span class="badge bg-success text-white">AVAILABLE</span>
-                                }
-                                else if (DateTime.Now > item.EndDate)
-                                {
-                                            <span class="badge bg-danger text-white">EXPIRED</span>
-                                }
-                                else
-                                {
-                                            <span class="badge bg-primary text-white">UPCOMING</span>
-                                }
-                                </p>
+{
+    <div>
+        <div id="head"></div>
+        <div id="picture"></div>
+        <div id="4eaContent"></div>
+        <div id="footer"></div>
+    </div>
+    }
+</div>*@
 
+<div class="container mt-5">
+    <div  style="gap: 1rem; display: flex; flex-direction: row; flex-wrap: wrap; ">
+        @foreach (var item in Model)
+        {
+            <div>
+                <div class="card myCard">
+                    <div class="image-container">
+                            <div class="first">
+                                <div class="d-flex justify-content-between align-items-center" >
+                                    <p>
+                                        @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
+                                        {
+                                            <span class="badge bg-success text-white isAvailable">AVAILABLE</span>
+                                        }
+                                        else if (DateTime.Now > item.EndDate)
+                                        {
+                                            <span class="badge bg-danger text-white isAvailable">EXPIRED</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-primary text-white isAvailable">UPCOMING</span>
+                                        }
+                                        </p>
+                                    
+                                    <!-- <span class="discount">-25%</span> -->
+                                    <!--<span class="wishlist"><i class="fa fa-heart-o"></i></span>-->
+                                </div>
+                        </div>
+                            <img src="@item.ImageURL" class="img-fluid rounded thumbnail-image" style="max-width: 100%; max-height: 100%;"/>
+                    </div>
+                    <div class="product-detail-container p-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="dress-name">@item.Name <a class="text-black float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a></h4>
+                                <div class="d-flex flex-column mb-2">
+                                    <span class="new-price">@item.Price.ToString("$ ####")</span>
                             </div>
                         </div>
-                        <div class="col-md-14">
-                            <div class="card-footer ">
-                                <p class="card-text">
-                                    <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye-fill"></i> Show Details </a>
-                                        <a class="btn btn-success text-white float-end" 
-                                        asp-controller="Orders" 
-                                        asp-action="AddItemToShoppingCart" 
-                                        asp-route-id="@item.Id"><i class="bi bi-cart-plus"></i> Buy (Price @item.Price.ToString("c"))</a>
-                                </p>
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+                            <div class="color-select d-flex "style="flex-direction: column">
+                                <span class="card-text myDates"><b>Available: </b>@item.StartDate.ToString("dd MMM") - @item.EndDate.ToString("dd MMM yyyy")</span>
+                                <span class="card-text myDates"><b>Category: </b>@item.MovieCategory</span>
+                                <span class="card-text myDates" ><b>Cinema: </b>@item.Cinema.Name</span>
+                                <span class="card-text myDates" ><b>Language: </b>@item.Language</span>
+                                <span class="card-text myDates" ><b>Runtime: </b>@item.RunTime</span>
+                                
+                                </div>
+                            <div class="d-flex ">
+                                
                             </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+                                <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id" style="width: 100px; height: 25px; font-size: 10px;"><i class="bi bi-eye-fill"></i> Show Detail </a>
+
+                            <!-- <span class="buy">BUY +</span>-->
+                                <a class="btn btn-success text-white buy" 
+                               asp-controller="Orders" 
+                               asp-action="AddItemToShoppingCart" 
+                               asp-route-id="@item.Id"><i class="bi bi-cart-plus" style=""></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-    }
+        }
+        
+    </div>
+    
 </div>
-
 @await Html.PartialAsync("_CreateItem", "Movies")
+
+<script src="~/js/movies.js" asp-append-version="true"></script>
+
