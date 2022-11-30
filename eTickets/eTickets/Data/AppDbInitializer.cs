@@ -1,6 +1,9 @@
 ﻿using eTickets.Data.Enums;
+using eTickets.Data.Static;
 using eTickets.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Client;
 
 namespace eTickets.Data
 {
@@ -54,6 +57,7 @@ namespace eTickets.Data
                     });
                     context.SaveChanges();
                 }
+
                 //Actors
                 if (!context.Actors.Any())
                 {
@@ -93,6 +97,7 @@ namespace eTickets.Data
                     });
                     context.SaveChanges();
                 }
+
                 //Producers
                 if (!context.Producers.Any())
                 {
@@ -132,6 +137,7 @@ namespace eTickets.Data
                     });
                     context.SaveChanges();
                 }
+
                 //Movies
                 if (!context.Movies.Any())
                 {
@@ -242,6 +248,7 @@ namespace eTickets.Data
                     });
                     context.SaveChanges();
                 }
+
                 //Actors & Movies
                 if (!context.Actors_Movies.Any())
                 {
@@ -258,12 +265,12 @@ namespace eTickets.Data
                             MovieId = 1
                         },
 
-                         new Actor_Movie()
+                        new Actor_Movie()
                         {
                             ActorId = 1,
                             MovieId = 2
                         },
-                         new Actor_Movie()
+                        new Actor_Movie()
                         {
                             ActorId = 4,
                             MovieId = 2
@@ -344,7 +351,57 @@ namespace eTickets.Data
                     context.SaveChanges();
                 }
             }
+        }
 
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+
+                // Roles
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+                // Users
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                string adminUserEmail = "admin@etickets.com";
+
+                var adminUser = await userManager.FindByEmailAsync("admin@etickets.com");
+                if (adminUser == null)
+                {
+                    var newAdminUser = new ApplicationUser()
+                    {
+                        FullName = "Admin User",
+                        UserName = "admin-user",
+                        Email = "admin@etickets.com",
+                        EmailConfirmed = true
+                    };
+                        await userManager.CreateAsync(newAdminUser, "Coding@1234?");
+                        await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
+
+                string appUserEmail = "user@etickets.com";
+
+                var appUser = await userManager.FindByEmailAsync(appUserEmail);
+                if (appUser == null)
+                {
+                    var newAppUser = new ApplicationUser()
+                    {
+                        FullName = "Application User",
+                        UserName = "app-user",
+                        Email = appUserEmail,
+                        EmailConfirmed = true
+                    };
+                    await userManager.CreateAsync(newAppUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+                }
+            }
         }
     }
 }
