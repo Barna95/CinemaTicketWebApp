@@ -149,7 +149,7 @@ namespace eTickets.Data
                             ProducerId = 3,
                             MovieCategory = MovieCategory.Documentary,
                             Rating = 4.2,
-                            PreviewLink = "previewlink",
+                            PreviewLink = "https://www.youtube.com/embed/cuA-xqBw4jE",
                             Language = Language.English,
                             Budget = 200000000,
                             RunTime = "3hours 22minutes"
@@ -166,7 +166,7 @@ namespace eTickets.Data
                             ProducerId = 1,
                             MovieCategory = MovieCategory.Action,
                             Rating = 4.2,
-                            PreviewLink = "previewlink",
+                            PreviewLink = "https://www.youtube.com/embed/6hB3S9bIaco",
                             Language = Language.English,
                             Budget = 200000000,
                             RunTime = "3hours 22minutes"
@@ -183,7 +183,7 @@ namespace eTickets.Data
                             ProducerId = 4,
                             MovieCategory = MovieCategory.Horror,
                             Rating = 4.2,
-                            PreviewLink = "previewlink",
+                            PreviewLink = "https://www.youtube.com/embed/RuuwmV0CT3g",
                             Language = Language.English,
                             Budget = 200000000,
                             RunTime = "3hours 22minutes"
@@ -200,7 +200,7 @@ namespace eTickets.Data
                             ProducerId = 2,
                             MovieCategory = MovieCategory.Documentary,
                             Rating = 4.2,
-                            PreviewLink = "previewlink",
+                            PreviewLink = "https://www.youtube.com/embed/LQIe4JKjYn4",
                             Language = Language.English,
                             Budget = 200000000,
                             RunTime = "3hours 22minutes"
@@ -217,7 +217,7 @@ namespace eTickets.Data
                             ProducerId = 3,
                             MovieCategory = MovieCategory.Cartoon,
                             Rating = 4.2,
-                            PreviewLink = "previewlink",
+                            PreviewLink = "https://www.youtube.com/embed/Wvn9w4jzbIo",
                             Language = Language.English,
                             Budget = 200000000,
                             RunTime = "3hours 22minutes"
@@ -234,7 +234,7 @@ namespace eTickets.Data
                             ProducerId = 5,
                             MovieCategory = MovieCategory.Drama,
                             Rating = 4.2,
-                            PreviewLink = "previewlink",
+                            PreviewLink = "https://www.youtube.com/embed/EiPAkcsqgFo",
                             Language = Language.English,
                             Budget = 200000000,
                             RunTime = "3hours 22minutes"
