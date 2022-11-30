@@ -2,6 +2,8 @@ using eTickets.Data;
 using eTickets.Data.Cart;
 using eTickets.Data.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+
 
 namespace eTickets
 {
@@ -15,6 +17,13 @@ namespace eTickets
             builder.Services.AddDbContext<AppDbContext>(options =>options
                             .UseSqlServer(builder.Configuration
                             .GetConnectionString("DefaultConnectionString")));
+            // Logging
+            builder.Host.UseSerilog((ctx, lc) => lc
+                .WriteTo.Console()
+                // if you want everything, change Warning() to Information()
+                .WriteTo.File("D:\\Logs\\log.txt").MinimumLevel.Warning()
+                .WriteTo.File("D:\\Logs\\structuredLog.json").MinimumLevel.Warning());
+            
 
             //Services configuration
             builder.Services.AddScoped<IActorsService, ActorsService>();
