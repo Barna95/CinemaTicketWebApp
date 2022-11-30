@@ -51,7 +51,7 @@ style="gap: 1rem; display: flex; flex-direction: row; flex-wrap: wrap; flex-grow
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="dress-name">@item.Name <a class="text-black float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a></h4>
                             <div class="d-flex flex-column mb-2">
-                                <span class="new-price">@item.Price.ToString("$ ####")</span>
+                                <span class="new-price">@item.Price.ToString("c")</span>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center pt-1">
