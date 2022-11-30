@@ -71,13 +71,12 @@ style="gap: 1rem; display: flex; flex-direction: row; flex-wrap: wrap; flex-grow
                         
                     </div>
                     <div class="d-flex justify-content-between align-items-center pt-1" >
-                        <a id="my-left-button" class="btn btn-info" asp-action="Details" asp-route-id="@item.Id" style="font-size: 10px;"><i class="bi bi-eye-fill"></i> Show Details </a>
-
-                        <!-- <span class="buy">BUY +</span>-->
-                        <a id="my-right-button" class="btn btn-success text-white buy" 
+                            <a id="my-left-button" class="btn btn-success text-white buy" 
                            asp-controller="Orders" 
                            asp-action="AddItemToShoppingCart" 
                            asp-route-id="@item.Id"><i class="bi bi-cart-plus" style=""></i></a>
+                        
+                            <a id="my-right-button" class="btn btn-info" asp-action="Details" asp-route-id="@item.Id" style="font-size: 10px;"><i class="bi bi-eye-fill"></i> Show Details </a>
                     </div>
                 </div>
             </div>
