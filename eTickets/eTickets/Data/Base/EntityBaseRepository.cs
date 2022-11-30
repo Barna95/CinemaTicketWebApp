@@ -29,11 +29,7 @@ namespace eTickets.Data.Base
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            var result = await _context.Set<T>().ToListAsync();
-            return result; 
-        }
+        public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
 
         public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties)
         {
@@ -42,11 +38,7 @@ namespace eTickets.Data.Base
             return await query.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
-        {
-            var result = await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
-            return result;
-        }
+        public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
 
         public async Task UpdateAsync(int id, T entity)
         {
