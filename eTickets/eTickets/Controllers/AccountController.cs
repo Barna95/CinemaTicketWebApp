@@ -1,4 +1,5 @@
-﻿using eTickets.Data;
+﻿using EmailServices;
+using eTickets.Data;
 using eTickets.Data.Static;
 using eTickets.Data.ViewModels;
 using eTickets.Models;
@@ -13,12 +14,15 @@ namespace eTickets.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly AppDbContext _context;
+        // Email - service
+        private readonly IEmailSender _emailSender;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _emailSender = emailSender;
         }
 
 
@@ -82,6 +86,9 @@ namespace eTickets.Controllers
             if (newUserResponse.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+                // Email-service
+                var message = new Message(new[] { newUser.Email }, "Welcome to Cinepax", $"Successful order!");
+                _emailSender.SendEmail(message);
                 return View("RegisterCompleted");
             }
 

@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using eTickets.Data.Static;
 using Microsoft.AspNetCore.Authorization;
+using EmailServices;
 
 namespace eTickets.Controllers
 {
@@ -19,11 +20,14 @@ namespace eTickets.Controllers
         private readonly ShoppingCart _shoppingCart;
         private readonly IOrdersService _ordersService;
 
-        public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart, IOrdersService ordersService)
+        // Email - service
+        private readonly IEmailSender _emailSender;
+        public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart, IOrdersService ordersService, IEmailSender emailSender)
         {
             _moviesService = moviesService;
             _shoppingCart = shoppingCart;
             _ordersService = ordersService;
+            _emailSender = emailSender;
         }
         public async Task<IActionResult> Index()
         {
@@ -76,6 +80,8 @@ namespace eTickets.Controllers
 
             await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();
+            var message =  new Message(new[] { userEmailAddress }, "Order Confirmation", $"Successful order!");
+            _emailSender.SendEmail(message);
 
             return View("OrderCompleted");
         }

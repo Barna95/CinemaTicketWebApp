@@ -1,3 +1,4 @@
+using EmailServices;
 using eTickets.Data;
 using eTickets.Data.Cart;
 using eTickets.Data.Services;
@@ -15,6 +16,7 @@ namespace eTickets
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var configmail = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
 
             //DbContext config
             builder.Services.AddDbContext<AppDbContext>(options =>options
@@ -47,6 +49,11 @@ namespace eTickets
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             });
+
+
+            // Email service
+            builder.Services.AddSingleton(configmail);
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

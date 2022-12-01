@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTickets", "eTickets\eTickets.csproj", "{C0E87F4A-46BA-4390-B09C-466A63EDF601}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTickets", "eTickets\eTickets.csproj", "{C0E87F4A-46BA-4390-B09C-466A63EDF601}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmailService", "EmailService", "{5EFACCA0-0B75-4CB0-B316-3F1154DFEA17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{612637BC-4809-45B2-8EA2-4514C182FAC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{C0E87F4A-46BA-4390-B09C-466A63EDF601}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0E87F4A-46BA-4390-B09C-466A63EDF601}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0E87F4A-46BA-4390-B09C-466A63EDF601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{612637BC-4809-45B2-8EA2-4514C182FAC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{612637BC-4809-45B2-8EA2-4514C182FAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{612637BC-4809-45B2-8EA2-4514C182FAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{612637BC-4809-45B2-8EA2-4514C182FAC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{612637BC-4809-45B2-8EA2-4514C182FAC0} = {5EFACCA0-0B75-4CB0-B316-3F1154DFEA17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {211751A3-E791-4685-9A29-BFA54C505743}

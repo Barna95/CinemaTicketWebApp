@@ -24,4 +24,8 @@
     <PackageReference Include="Stripe.net" Version="41.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EmailService\EmailService.csproj" />
+  </ItemGroup>
+
 </Project>
