@@ -13,25 +13,22 @@
 }
 else
 {
-
-    @*User profile section*@
+     @*User profile section*@
     <div class="dropdown">
-        <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-toggle="dropdown"
-                aria-expanded="false">
-            <i class="bi bi-person-badge"></i> Hello @UserManager.GetUserName(User)
+        <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="profile-btn" data-toggle="dropdown">
+                <i class="bi bi-person-badge"></i> Hello @UserManager.GetUserName(User)
         </button>
         <ul class="dropdown-menu" aria-labelledby="profile-btn">
-            <li>
-                <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
-                    <i class="bi bi-list"></i> Orders
-                </a>
-            </li>
+            <li><a class="dropdown-item" asp-controller="Orders" asp-action="Index"><i class="bi bi-list"></i>Orders</a></li>
+            @*<li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>*@
         </ul>
     </div>
-    <span style="padding: 5px;"></span>
+                    
+    <span style="padding: 5px;"> </span>
     <form asp-controller="Account" asp-action="Logout">
         <button class="btn btn-outline-danger my-2 my-sm-0">
-            <i class="bi bi-box-arrow-in-right"></i> Log out
+            <i class="bi bi-box-arrow-in-right"></i>Log out
         </button>
     </form>
 }
