@@ -49,9 +49,10 @@ style="gap: 1rem; display: flex; flex-direction: row; flex-wrap: wrap; flex-grow
                         </div>
                     <div class="product-detail-container p-2" id="mukodj">
                         <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="dress-name">@item.Name <a class="text-black float-right" asp-action="Edit" asp-route-id="@item.Id"></a></h4>
                             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                             {
-                                <h4 class="dress-name">@item.Name <a class="text-black float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a></h4>
+                                <i class="bi bi-pencil-square"></i>
                             }
                             <div class="d-flex flex-column mb-2">
                                 <span class="new-price">@item.Price.ToString("c")</span>
