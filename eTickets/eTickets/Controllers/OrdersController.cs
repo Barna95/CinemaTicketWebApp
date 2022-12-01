@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using eTickets.Data.Static;
 using Microsoft.AspNetCore.Authorization;
 using EmailServices;
+using System.Text;
 
 namespace eTickets.Controllers
 {
@@ -76,14 +77,33 @@ namespace eTickets.Controllers
         {
             var items = _shoppingCart.GetShoppingCartItems();
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
+            string userEmailAddress = User.FindFirstValue(ClaimTypes.Email)
+                
+                ;
 
             await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();
-            var message =  new Message(new[] { userEmailAddress }, "Order Confirmation", $"Successful order!");
+
+            StringBuilder content = EmailContentBuilder();
+            var message =  new Message(new[] { userEmailAddress }, "Order Confirmation", $"{content}");
             _emailSender.SendEmail(message);
 
             return View("OrderCompleted");
+        }
+        private StringBuilder EmailContentBuilder()
+        {
+            StreamReader reader = new StreamReader("C:\\Users\\Erik\\Documents\\OOP - C#\\6. week pair\\codecool-shop-2-csharp-Eriknpy\\eTickets\\eTickets\\Views\\Emails\\OrderConfirm.cshtml");
+            StringBuilder content = new StringBuilder();
+            using (reader)
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    content.Append(line);
+                }
+            }
+
+            return content;
         }
     }
 }

@@ -1,11 +1,14 @@
 ﻿using EmailServices;
 using eTickets.Data;
+using eTickets.Data.Cart;
 using eTickets.Data.Static;
 using eTickets.Data.ViewModels;
 using eTickets.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Text;
 
 namespace eTickets.Controllers
 {
@@ -87,7 +90,8 @@ namespace eTickets.Controllers
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
                 // Email-service
-                var message = new Message(new[] { newUser.Email }, "Welcome to Cinepax", $"Successful order!");
+                StringBuilder content = EmailContentBuilder();
+                var message = new Message(new[] { newUser.Email }, "Welcome to Cinepax", $"{content}");
                 _emailSender.SendEmail(message);
                 return View("RegisterCompleted");
             }
@@ -98,6 +102,22 @@ namespace eTickets.Controllers
             return View(registerVM);
 
 
+        }
+
+        private StringBuilder EmailContentBuilder()
+        {
+            StreamReader reader = new StreamReader("C:\\Users\\Erik\\Documents\\OOP - C#\\6. week pair\\codecool-shop-2-csharp-Eriknpy\\eTickets\\eTickets\\Views\\Emails\\RegistrationComplete.cshtml");
+            StringBuilder content = new StringBuilder();
+            using (reader)
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    content.Append(line);
+                }
+            }
+
+            return content;
         }
 
         [HttpPost]
@@ -112,5 +132,6 @@ namespace eTickets.Controllers
             return View();
         }
 
+        
     }
 }

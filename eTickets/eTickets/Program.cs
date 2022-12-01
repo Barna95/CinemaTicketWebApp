@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-
+using System;
+using System.IO;
 
 namespace eTickets
 {
@@ -17,7 +18,6 @@ namespace eTickets
         {
             var builder = WebApplication.CreateBuilder(args);
             var configmail = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
-
             //DbContext config
             builder.Services.AddDbContext<AppDbContext>(options =>options
                             .UseSqlServer(builder.Configuration
