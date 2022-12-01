@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eTickets.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IMoviesService _moviesService;
