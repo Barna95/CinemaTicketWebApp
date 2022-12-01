@@ -84,6 +84,7 @@ namespace eTickets.Controllers
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
                 return View("RegisterCompleted");
             }
+
             List<IdentityError> errorList = newUserResponse.Errors.ToList();
             var errors = string.Join(", ", errorList.Select(e=>e.Description));
             TempData["Error"] = errors;

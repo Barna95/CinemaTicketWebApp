@@ -72,7 +72,6 @@ namespace eTickets
             // Authentication & Authorization
 
             app.UseAuthentication();
-            app.UseAuthentication();
 
             app.UseAuthorization();
 
