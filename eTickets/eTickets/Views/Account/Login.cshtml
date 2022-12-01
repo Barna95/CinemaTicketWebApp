@@ -6,10 +6,10 @@
 }
 
 <div class="row">
-    <div class="col-md-6 offset-3">
-        <p>
+    <div class="col-md-6 offset-3" style="display: flex; justify-content: center; flex-direction: column; gap: 10px;">
+        <div style="display: flex; justify-content: center;">
             <h4>Log in to your account</h4>
-        </p>
+        </div>
 
         @if(TempData["Error"] != null)
         {
@@ -34,7 +34,7 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group" style="display: flex;justify-content: space-between">
+                    <div class="form-group" style="display: flex; justify-content: space-between; margin: 5px 0 0 0;">
                         <input class="btn btn-outline-success float-right" type="submit" value="Log in" />
                         <a class="btn btn-outline-secondary" asp-controller="Movies" asp-action="Index">Cancel</a>
                     </div>
