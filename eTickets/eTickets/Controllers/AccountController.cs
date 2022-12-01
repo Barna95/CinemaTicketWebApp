@@ -4,21 +4,30 @@ using eTickets.Data.ViewModels;
 using eTickets.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eTickets.Controllers
 {
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _singInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly AppDbContext _context;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager, AppDbContext context)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context)
         {
             _userManager = userManager;
-            _singInManager = singInManager;
+            _signInManager = signInManager;
             _context = context;
         }
+
+
+        public async Task<IActionResult> Users()
+        {
+            var users = await _context.Users.ToListAsync();
+            return View(users);
+        }
+
 
         public IActionResult Login() => View(new LoginVM());
 
@@ -33,7 +42,7 @@ namespace eTickets.Controllers
                 var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
                 if (passwordCheck)
                 {
-                    var result = await _singInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Movies");
@@ -46,6 +55,8 @@ namespace eTickets.Controllers
             TempData["Error"] = "Wrong credentials. Please, try again!";
             return View(loginVM);
         }
+
+
         public IActionResult Register() => View(new RegisterVM());
 
         [HttpPost]
@@ -64,22 +75,34 @@ namespace eTickets.Controllers
             {
                 FullName = registerVM.FullName,
                 Email = registerVM.EmailAddress,
-                UserName = registerVM.EmailAddress,
+                UserName = registerVM.EmailAddress
             };
-            var newUserResponse = await _userManager.CreateAsync(newUser,registerVM.Password);
+            var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
 
             if (newUserResponse.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+                return View("RegisterCompleted");
             }
-            return View("RegisterCompleted");
+            List<IdentityError> errorList = newUserResponse.Errors.ToList();
+            var errors = string.Join(", ", errorList.Select(e=>e.Description));
+            TempData["Error"] = errors;
+            return View(registerVM);
+
+
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await _singInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Movies");
         }
+
+        public IActionResult AccessDenied(string ReturnUrl)
+        {
+            return View();
+        }
+
     }
 }
