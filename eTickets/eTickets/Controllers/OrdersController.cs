@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using eTickets.Data.Static;
 using Microsoft.AspNetCore.Authorization;
 
 namespace eTickets.Controllers
