@@ -90,7 +90,6 @@ namespace eTickets.Controllers
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
                 // Email-service
-                //StringBuilder content = EmailContentBuilder();
                 var message = new Message(new[] { newUser.Email }, "Welcome to Cinepax", "Thank you for your registration, you can log in now!");
                 _emailSender.SendEmail(message);
                 return View("RegisterCompleted");
@@ -102,22 +101,6 @@ namespace eTickets.Controllers
             return RedirectToAction("Login", "Account");
 
 
-        }
-
-        private StringBuilder EmailContentBuilder()
-        {
-            StreamReader reader = new StreamReader("C:\\Users\\Erik\\Documents\\OOP - C#\\6. week pair\\codecool-shop-2-csharp-Eriknpy\\eTickets\\eTickets\\Views\\Emails\\RegistrationComplete.cshtml");
-            StringBuilder content = new StringBuilder();
-            using (reader)
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    content.Append(line);
-                }
-            }
-
-            return content;
         }
 
         [HttpPost]

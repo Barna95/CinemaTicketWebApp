@@ -84,26 +84,10 @@ namespace eTickets.Controllers
             await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();
 
-            //StringBuilder content = EmailContentBuilder();
             var message =  new Message(new[] { userEmailAddress }, "Order Confirmation", "Thank you for your order!");
             _emailSender.SendEmail(message);
 
             return View("OrderCompleted");
-        }
-        private StringBuilder EmailContentBuilder()
-        {
-            StreamReader reader = new StreamReader("C:\\Users\\Erik\\Documents\\OOP - C#\\6. week pair\\codecool-shop-2-csharp-Eriknpy\\eTickets\\eTickets\\Views\\Emails\\OrderConfirm.cshtml");
-            StringBuilder content = new StringBuilder();
-            using (reader)
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    content.Append(line);
-                }
-            }
-
-            return content;
         }
     }
 }
