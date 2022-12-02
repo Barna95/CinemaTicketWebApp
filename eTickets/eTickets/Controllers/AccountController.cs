@@ -99,7 +99,7 @@ namespace eTickets.Controllers
             List<IdentityError> errorList = newUserResponse.Errors.ToList();
             var errors = string.Join(", ", errorList.Select(e=>e.Description));
             TempData["Error"] = errors;
-            return View(registerVM);
+            return RedirectToAction("Login", "Account");
 
 
         }
