@@ -17,9 +17,16 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <img src="@Model.ImageURL" width="100%" alt="@Model.Name">
+                <div style="display: flex; flex-direction: row">
+                    <div class="col-md-4">
+                        <img src="@Model.ImageURL" width="100%" alt="@Model.Name">
+                    </div>
+                    <iframe style="margin-top: 50px; padding-left: 25px; padding-right: 25px;"allowfullscreen loading="lazy" id="video1" width="1500" height="500"
+                            frameborder="0" allowtransparency="true"
+                            src="@Model.PreviewLink"> 
+                    </iframe>
                 </div>
+                
                 <div class="col-md-8">
                     <div class="card-body">
                         <p class="card-text">@Model.Description</p>
@@ -36,12 +43,9 @@
                             </a>
                         </p>
                         <p class="card-text"><b>Category: </b>@Model.MovieCategory</p>
-                        <p class="card-text"><b>Budget: </b>@Model.Budget</p>
+                        <p class="card-text"><b>Budget: </b>$ @Model.Budget</p>
                         @*<p class="card-text"><b>PreviewLink: </b>@Model.PreviewLink</p>*@
-                        <iframe width="420" height="315"
-                                frameborder="0" allowtransparency="true"
-                                src="@Model.PreviewLink"id="VideoUrlPreview"> 
-                        </iframe>
+                        
                         <p class="card-text"><b>RunTime: </b>@Model.RunTime</p>
                         <p class="card-text"><b>Rating: </b>@Model.Rating</p>
                         <p class="card-text"><b>Language: </b>@Model.Language</p>
@@ -97,3 +101,9 @@
         </div>
     </div>
 </div>
+<script>
+    console.log("Hello")
+    myVid=document.getElementById("video1");
+    console.log(myVid);
+    myVid.muted=true;
+</script>
