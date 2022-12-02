@@ -90,8 +90,8 @@ namespace eTickets.Controllers
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
                 // Email-service
-                StringBuilder content = EmailContentBuilder();
-                var message = new Message(new[] { newUser.Email }, "Welcome to Cinepax", $"{content}");
+                //StringBuilder content = EmailContentBuilder();
+                var message = new Message(new[] { newUser.Email }, "Welcome to Cinepax", "Thank you for your registration, you can log in now!");
                 _emailSender.SendEmail(message);
                 return View("RegisterCompleted");
             }

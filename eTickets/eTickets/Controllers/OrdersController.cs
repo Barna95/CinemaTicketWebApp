@@ -84,8 +84,8 @@ namespace eTickets.Controllers
             await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();
 
-            StringBuilder content = EmailContentBuilder();
-            var message =  new Message(new[] { userEmailAddress }, "Order Confirmation", $"{content}");
+            //StringBuilder content = EmailContentBuilder();
+            var message =  new Message(new[] { userEmailAddress }, "Order Confirmation", "Thank you for your order!");
             _emailSender.SendEmail(message);
 
             return View("OrderCompleted");
