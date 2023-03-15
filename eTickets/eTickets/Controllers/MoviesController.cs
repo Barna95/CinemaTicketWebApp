@@ -101,6 +101,8 @@ namespace eTickets.Controllers
                 MovieCategory = movieDetails.MovieCategory,
                 CinemaId= movieDetails.CinemaId,
                 ProducerId= movieDetails.ProducerId,
+                PreviewLink = movieDetails.PreviewLink,
+                RunTime = movieDetails.RunTime,
                 ActorIds = movieDetails.Actors_Movies.Select(n => n.ActorId).ToList(),
             };
 
